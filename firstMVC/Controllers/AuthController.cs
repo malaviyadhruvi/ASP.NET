@@ -3,7 +3,6 @@ using firstMVC.Dto;
 using firstMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace firstMVC.Controllers
 {
@@ -28,7 +27,7 @@ namespace firstMVC.Controllers
         {
             if(dto == null || string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Password))
             {
-                ViewBag.ErrorMessage = "please enter valid details";
+                ViewBag.ErrorMessage = "please enter all details";
                 return View("Register");
             }
             var existingUser = await _context.Users.FirstOrDefaultAsync(u=>u.Email == dto.Email);
@@ -51,6 +50,30 @@ namespace firstMVC.Controllers
             }
             TempData["SuccessMessage"] = "User created successfully! login please";
             return RedirectToAction("Login");
+        }
+
+        public async Task<IActionResult> LoginUser(UserDto dto)
+        {
+            var isUserExist = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (isUserExist == null)
+            {
+                ViewBag.ErrorMessage = "User not found!";
+                return View("Login");
+
+            }
+            else
+            {
+                if (isUserExist.Password == dto.Password)
+                {
+                    TempData["SuccessMessage"] = "Login successful!";
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Password is incorrect!";
+                    return View("Login");
+                }
+            }
         }
     }
 }
