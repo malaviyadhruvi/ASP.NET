@@ -1,0 +1,44 @@
+﻿@using firstMVC.Dto
+@model ProductDto
+
+<form method="post"
+      asp-action="CreateProduct"
+      class="mx-auto p-4 border rounded shadow-sm"
+      style="max-width: 450px;">
+
+    <h4 class="text-center mb-4">Add Product</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <input asp-for="ProductName"
+               class="form-control"
+               placeholder="Enter product name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description"
+                  class="form-control"
+                  placeholder="Enter description"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input asp-for="Price"
+               type="number"
+               class="form-control"
+               placeholder="Enter price">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Color</label>
+        <input asp-for="Color"
+               class="form-control"
+               placeholder="Enter color">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        Add Product
+    </button>
+
+</form>
