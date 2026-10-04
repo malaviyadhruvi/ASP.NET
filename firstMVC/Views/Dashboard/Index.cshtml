@@ -36,14 +36,10 @@
                         <td>@product.Color</td>
 
                         <td>
-                            <a asp-action="Edit"
-                               asp-route-id="@product.Id"
-                               class="btn btn-warning">
-                                Edit
-                            </a>
+                            <a asp-action="UpdateProductForm" asp-route-id="@product.Id" class="btn btn-warning"> Edit </a>
 
-                            <a asp-action="Delete"
-                               asp-route-id="@product.Id"
+                            <a asp-action="DeleteProduct"
+                               asp-route-productid="@product.Id"
                                class="btn btn-danger">
                                 Delete
                             </a>
