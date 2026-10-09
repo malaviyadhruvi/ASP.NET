@@ -4,8 +4,10 @@ using firstMVC.Dto;
 using firstMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 namespace firstMVC.Controllers
 {
+    [Authorize]
     public class DashBoardController(appDbContext context) : Controller
     {
         public IActionResult Index()

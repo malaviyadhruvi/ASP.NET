@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(options =>
     {
         OnMessageReceived = context =>
         {
-            var token = context.Request.Cookies["jwt-token"];
+            var token = context.Request.Cookies["jwtToken"];
             if (!string.IsNullOrEmpty(token))
             {
                 context.Token = token;

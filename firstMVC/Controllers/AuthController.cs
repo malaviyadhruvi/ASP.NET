@@ -12,8 +12,7 @@ namespace firstMVC.Controllers
 {
     public class AuthController(appDbContext _context) : Controller
     {
-        private readonly string token;
-
+       
         //private readonly appDbContext _context;
         //private AuthController(appDbContext context)
         //{
@@ -71,7 +70,7 @@ namespace firstMVC.Controllers
             {
                 if (isUserExist.Password == dto.Password)
                 {
-                    GenerateJwtToken(dto);
+                    string token = GenerateJwtToken(dto);
                     Response.Cookies.Append("jwtToken",token, new CookieOptions
                     {
                         HttpOnly = true,
