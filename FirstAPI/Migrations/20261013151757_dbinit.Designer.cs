@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FirstAPI.Migrations
 {
-    [DbContext(typeof(appDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20261013151757_dbinit")]
     partial class dbinit
     {

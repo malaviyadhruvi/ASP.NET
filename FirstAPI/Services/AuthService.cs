@@ -16,19 +16,19 @@ namespace FirstAPI.Services
         {
             try
             {
-                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email && u.Password == dto.Password);   
-                if(existingUser != null)
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email && u.Password == dto.Password);
+                if (existingUser == null)
                 {
-                    return new Tuple<int, string>(1, "Login successful");
+                    return new Tuple<int, string>(0, "Invalid email or password");
                 }
                 else
                 {
-                    return new Tuple<int, string>(0, "Invalid email or password");
+                    return new Tuple<int, string>(1, "Login successful");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return new Tuple<int, string>(3, "Something went wrong");
             }
         }   
     }
