@@ -10,5 +10,6 @@ namespace FirstAPI.Data
         }
         public DbSet<FirstAPI.Entities.Employee> Employees { get; set; }
         public DbSet<FirstAPI.Entities.User> Users { get; set; }
+        public object AccountUsers { get; internal set; }
     }
 }
