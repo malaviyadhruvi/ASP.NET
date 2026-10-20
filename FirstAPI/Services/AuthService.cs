@@ -38,7 +38,7 @@ namespace FirstAPI.Services
                 {
                     existingUser.Password = passwordHashing(dto);
                     _context.Users.Update(existingUser);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return new Tuple<int, string>(2, "Login successful");
                 }
                 else if(verifypass == PasswordVerificationResult.Failed)
@@ -68,7 +68,7 @@ namespace FirstAPI.Services
                     Id = Guid.NewGuid(),
                     Name = dto.Name,
                     Email = dto.Email,
-                    Password = dto.Password
+                    Password = passwordHashing(dto)
 
                 });
                 await _context.SaveChangesAsync();
@@ -76,6 +76,7 @@ namespace FirstAPI.Services
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 throw;
             }
         }

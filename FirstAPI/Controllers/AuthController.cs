@@ -43,23 +43,33 @@ namespace FirstAPI.Controllers
                     
             }
         }
+
         [HttpPost("Register")]
-            public async Task<IActionResult> Register([FromBody]UserDto userdto)
+        public async Task<IActionResult> Register([FromBody] UserDto userdto)
         {
             try
             {
                 var result = await _authService.RegisterUser(userdto);
+
                 if (result.Item1 == 0)
                 {
-                    return Ok(ResponseResult<string>.Failure(null, result.Item2));
+                    return BadRequest(
+                        ResponseResult<string>.Failure(null, result.Item2)
+                    );
                 }
-                return Ok(ResponseResult<string>.Success(null, result.Item2));
 
+                return Ok(
+                    ResponseResult<string>.Success(result.Item2, "User Registered Successfully")
+                );
             }
-            catch(Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, ResponseResult<string>.Failure(null, "Something went wrong"));
+                Console.WriteLine(ex.ToString());
+
+                return StatusCode(500,
+                    ResponseResult<string>.Failure(null, ex.Message));
             }
         }
+
     }
 }

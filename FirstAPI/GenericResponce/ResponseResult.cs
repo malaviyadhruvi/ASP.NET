@@ -23,10 +23,5 @@
                 Status = false
             };
         }
-
-        internal static object? Success(string item2, string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
